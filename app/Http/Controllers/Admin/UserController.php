@@ -82,8 +82,11 @@ class UserController extends Controller {
     public function show(Request $request, $id = null) {
         if (Auth::guard('admin')->check()) {
             $id = base64_decode($id);
-            $user = User::with('user_poll')->where('id',$id)->first();   
-           $data['user'] = $user;
+            $user = User::with('user_poll')->where('id',$id)->first();  
+            $poll_count = User::with('poll')->where('id',$id)->first(); 
+            
+            $data['user'] = $user;
+            $data['poll'] = $poll_count;
             if ($data) {                
                 
                 return view('admin.users.user_detail')->with($data);

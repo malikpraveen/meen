@@ -20,6 +20,10 @@ class User extends Model
         return $this->hasMany(UserPoll::class)->with('options');
     }
 
+    public function poll(){
+        return $this->hasMany(UserPoll::class,'user_id','id');
+    }
+
     public function user_message(){
         return $this->hasOne(Help_support::class,'user_id','id');
     }

@@ -46,7 +46,7 @@
         <div class="card">
           <div class="card-body"><span class="info-box-icon bg-red">@forelse($user->user_poll as $user_poll)<a href="<?= url('admin/poll-detail/'.base64_encode($user_poll->id)) ?>"><i class="fa fa-signal" style="color:white;" aria-hidden="true"></i></a>@empty<i class="fa fa-signal" style="color:white;" aria-hidden="true"></i> @endforelse</span>
             <div class="info-box-content"> <span class="info-box-number f-14">Poll </span> 
-             <span class="info-box-text">poll</span> 
+             <span class="info-box-text">{{$poll->poll->count()}}</span> 
             </div>
           </div>
         </div>
