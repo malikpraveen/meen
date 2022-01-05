@@ -34,7 +34,7 @@
         <h1>user List</h1> 
     </div>
     <div class="content">  
-        <div class="card mb-2">
+    <div class="card mb-2">
             <div class="card-body">
                 <form method="post" action="{{route('admin.user.filter')}}">
                     @csrf
@@ -42,7 +42,7 @@
                         <div class="col-md-4 col-xs-6">
                             <div class="form-group">
                                 <label>From </label>
-                                <input type="date" name="start_date" onchange="$('#start_date').attr('min', $(this).val());" max="<?= date('Y-m-d') ?>" value="{{isset($start_date)?$start_date:''}}" class="form-control">
+                                <input type="date" onchange="$('#start_date').attr('min', $(this).val());" max="<?= date('Y-m-d') ?>"  value="{{isset($start_date)?$start_date:''}}"  name="start_date" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-4 col-xs-6">
@@ -55,7 +55,7 @@
                             <p id="formError" class="text-danger"></p>
                         </div>
                         <div class="col-md-4 col-xs-6 mt-1">
-                            <a href="#filter" onclick="filterList(this)"; class="btn btn-primary pt-2 pb-2 w-100 mt-1">Search</a>
+                        <a href="#filter" onclick="filterList(this)"; class="btn btn-primary pt-2 pb-2 w-100 mt-1">Search</a>
                         </div> 
                         <div class="col-md-4 col-xs-6 mt-1">
                             <a href='<?= url('admin/user-management') ?>' class="btn btn-primary pt-2 pb-2 w-100 mt-1">Reset</a>
@@ -163,6 +163,28 @@
                     });
         }
     </script>
+    <script>
+       function filterList(obj){
+        if ($(':input[name=start_date]').val() == '' && $(':input[name=end_date]').val() == ''){
+        $("#formError").html('Select filter attribute');
+        } else{
+
+        if ($(':input[name=start_date]').val() != '' && $(':input[name=end_date]').val() != ''){
+        $('form').submit();
+        } else{
+        if ($(':input[name=start_date]').val() != ''){
+        $("#formError").html('End date is required');
+        } else if ($(':input[name=end_date]').val() != ''){
+        $("#formError").html('Start date is required');
+        } else{
+        $("#formError").html('Select filter attribute');
+        }
+        }
+        }
+
+        }
+    
+ </script>
     
 
     @endsection

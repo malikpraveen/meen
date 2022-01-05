@@ -16,6 +16,7 @@
               </div>
               <h3 class="profile-username text-center text-black">{{$user->first_name}}&nbsp;&nbsp;{{$user->last_name}}</h3> 
               <p class="text-dark text-center">{{$user->user_name}}
+              <p class="text-dark text-center">Register on: {{date('D M Y', strtotime($user->created_at))}}
                 
               </p>
             </div>
@@ -43,7 +44,7 @@
       </div>
       <div class="col-lg-4 col-xs-6 m-b-3">
         <div class="card">
-          <div class="card-body"><span class="info-box-icon bg-red">@foreach($user->user_poll as $user_poll)<a href="<?= url('admin/poll-detail/'.base64_encode($user_poll->id)) ?>"><i class="fa fa-signal" style="color:white;" aria-hidden="true"></i></a>@endforeach</span>
+          <div class="card-body"><span class="info-box-icon bg-red">@forelse($user->user_poll as $user_poll)<a href="<?= url('admin/poll-detail/'.base64_encode($user_poll->id)) ?>"><i class="fa fa-signal" style="color:white;" aria-hidden="true"></i></a>@empty<i class="fa fa-signal" style="color:white;" aria-hidden="true"></i> @endforelse</span>
             <div class="info-box-content"> <span class="info-box-number f-14">Poll </span> 
              <span class="info-box-text">poll</span> 
             </div>

@@ -93,15 +93,22 @@ class QueryController extends Controller
 
     }
 
-    public function filter(Request $request){
-        $data =[
-            "start_date" => $request->input('start_date'),
-            "end_date" => $request->input('end_date')
 
-        ];
-
-        $data['query'] =  Help_support::with('support_subject','user')->whereBetween('created_at', [$data])->get();
-       return view('admin.query.query_list')->with($data);
+    public function filter(Request $request) {
+        $start_date = date('Y-m-d 00:00:00', strtotime($request->input('start_date')));
+        $end_date = date('Y-m-d 23:59:59', strtotime($request->input('end_date')));
+        if ($request->input('start_date') && $request->input('end_date')) {
+            $query = Help_support::where('status', '<>', 99)
+                    ->whereBetween('created_at', [$start_date, $end_date])
+                    ->orderBy('id', 'DESC')
+                    ->get();
+        } else {
+            $query = Help_support::where('status', '<>', 99)->orderBy('id', 'DESC')->get();
+        }
+        $data['start_date'] = $request->input('start_date');
+        $data['end_date'] = $request->input('end_date');
+        $data['query'] = $query;
+        return view('admin.query.query_list')->with($data);
     }
     
 }

@@ -16,7 +16,7 @@
             <ul class="nav navbar-nav"> 
                 <li class="dropdown user user-menu p-ph-res" style="position: relative; margin-top: 16px;"> <i class="fa fa-user" aria-hidden="true"></i> Last Login
                 <ul>
-                  <span style="position: relative; right: 40px;">{{Session::get('last_log_in')['last_login']}}</span>
+                  <span style="position: relative; right: 40px;">{{date('d M Y H:m:i', strtotime(Session::get('last_log_in')['last_login']))}}</span>
                     </ul>
                 </li>
             </ul>
