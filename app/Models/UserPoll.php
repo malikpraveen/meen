@@ -16,6 +16,9 @@ class UserPoll extends Model
     	return $this->belongsTo(User::class, 'user_id','id')->select([
         'id','first_name','last_name','email','mobile_number','user_name','profile_pic']);
     }
-   
+    function created_by(){      
+        return $this->belongsTo(User::class, 'user_id')->select([
+        'id','first_name','last_name','email','country_code','mobile_number','profile_pic']);
+    }
    
 }

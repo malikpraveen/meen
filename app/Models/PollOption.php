@@ -12,4 +12,8 @@ class PollOption extends Model
     function userpoll(){    	
     	return $this->belongsTo(UserPoll::class,'option_id');
     }
+    function users(){    	
+    	return $this->hasMany(PollAnswer::class,'option_id')->with(['user_detail']);
+    }
+
 }
